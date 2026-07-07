@@ -1,5 +1,6 @@
 <?php
 
+require_once 'views/View.php';
 require_once 'models/UserModel.php';
 
 class LoginController
@@ -9,49 +10,62 @@ class LoginController
      */
     public function index(): void
     {
-        // Vérifie si le formulaire a été soumis
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        try {
 
-            // Récupération sécurisée des champs du formulaire
-            $email    = $_POST['email'] ?? '';
-            $password = $_POST['password'] ?? '';
+            // Si le formulaire est soumis
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            // Vérifie que tous les champs sont remplis
-            if (empty($email) || empty($password)) {
-                $error = "Tous les champs sont obligatoires.";
-                $view  = 'views/login.php';
-                require 'views/layout.php';
+                // Récupération sécurisée des champs du formulaire
+                $email    = $_POST['email'] ?? '';
+                $password = $_POST['password'] ?? '';
+
+                // Vérifie que tous les champs sont remplis
+                if (empty($email) || empty($password)) {
+                    $view = new View("Connexion");
+                    $view->render("login", [
+                        'error' => "Tous les champs sont obligatoires."
+                    ]);
+                    return;
+                }
+
+                // Instance du modèle utilisateur
+                $model = new UserModel();
+
+                // Recherche de l'utilisateur par email
+                $user = $model->findUserByEmail($email);
+
+                // Vérifie si l'utilisateur existe et si le mot de passe est correct
+                if ($user && password_verify($password, $user['password'])) {
+
+                    // Démarre la session et stocke les informations utilisateur
+                    session_start();
+                    $_SESSION['user']   = $user;
+                    $_SESSION['idUser'] = $user['id'];
+
+                    // Redirection vers la page profil après connexion réussie
+                    header("Location: index.php?action=profil");
+                    exit;
+                }
+
+                // Si la vérification échoue
+                $view = new View("Connexion");
+                $view->render("login", [
+                    'error' => "Identifiants incorrects."
+                ]);
                 return;
             }
 
-            // Instance du modèle utilisateur pour interagir avec la base de données
-            $model = new UserModel();
+            // Si aucune soumission, affiche simplement la page de connexion
+            $view = new View("Connexion");
+            $view->render("login");
 
-            // Recherche de l'utilisateur par email
-            $user = $model->findUserByEmail($email);
+        } catch (Exception $exception) {
 
-            // Vérifie si l'utilisateur existe et si le mot de passe est correct
-            if ($user && password_verify($password, $user['password'])) {
-
-                // Démarre la session et stocke les informations utilisateur
-                session_start();
-                $_SESSION['user']   = $user;
-                $_SESSION['idUser'] = $user['id'];
-
-                // Redirige vers la page profil après connexion réussie
-                header('Location: index.php?action=profil');
-                exit;
-            }
-
-            // Si la vérification échoue, affiche un message d’erreur
-            $error = "Identifiants incorrects.";
-            $view  = 'views/login.php';
-            require 'views/layout.php';
-            return;
+            // Affichage de la page d'erreur
+            $errorView = new View("Erreur");
+            $errorView->render("errorPage", [
+                'errorMessage' => $exception->getMessage()
+            ]);
         }
-
-        // Si aucune soumission, affiche simplement la page de connexion
-        $view = 'views/login.php';
-        require 'views/layout.php';
     }
 }

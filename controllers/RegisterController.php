@@ -1,44 +1,70 @@
 <?php
 
+require_once 'views/View.php';
 require_once 'models/UserModel.php';
 
 class RegisterController
 {
     public function index(): void
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        try {
 
-            $pseudo   = $_POST['pseudo'] ?? '';
-            $email    = $_POST['email'] ?? '';
-            $password = $_POST['password'] ?? '';
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            if (empty($pseudo) || empty($email) || empty($password)) {
-                $error = "Tous les champs sont obligatoires.";
-                $view  = 'views/register.php';
-                require 'views/layout.php';
-                return;
+                $pseudo   = $_POST['pseudo'] ?? '';
+                $email    = $_POST['email'] ?? '';
+                $password = $_POST['password'] ?? '';
+
+                // Tableau pour stocker toutes les erreurs
+                $errors = [];
+
+                // Vérification des champs vides
+                if (empty($pseudo) || empty($email) || empty($password)) {
+                    $errors[] = "Tous les champs sont obligatoires.";
+                }
+
+                // Instance du modèle utilisateur
+                $model = new UserModel();
+
+                // Vérification pseudo déjà pris
+                $existingPseudo = $model->findUserByUsername($pseudo);
+                if ($existingPseudo) {
+                    $errors[] = "Ce pseudo est déjà utilisé.";
+                }
+
+                // Vérification email déjà pris
+                $existingUser = $model->findUserByEmail($email);
+                if ($existingUser) {
+                    $errors[] = "Cet email est déjà utilisé.";
+                }
+
+                // S'il y a des erreurs, on les affiche toutes
+                if (!empty($errors)) {
+                    $view = new View("Inscription");
+                    $view->render("register", [
+                        'errors' => $errors
+                    ]);
+                    return;
+                }
+
+                // Création de l'utilisateur
+                $model->createUser($pseudo, $email, $password);
+
+                // Redirection vers la page de connexion
+                header("Location: index.php?action=login");
+                exit;
             }
 
-            $model = new UserModel();
+            // Affichage simple de la page
+            $view = new View("Inscription");
+            $view->render("register");
 
-            // Vérification si l'email existe déjà
-            $existingUser = $model->findUserByEmail($email);
+        } catch (Exception $exception) {
 
-            if ($existingUser) {
-                $error = "Cet email est déjà utilisé.";
-                $view  = 'views/register.php';
-                require 'views/layout.php';
-                return;
-            }
-
-            // Création de l'utilisateur
-            $model->createUser($pseudo, $email, $password);
-
-            header('Location: index.php?action=login');
-            exit;
+            $errorView = new View("Erreur");
+            $errorView->render("errorPage", [
+                'errorMessage' => $exception->getMessage()
+            ]);
         }
-
-        $view = 'views/register.php';
-        require 'views/layout.php';
     }
 }

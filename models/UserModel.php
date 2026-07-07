@@ -23,7 +23,7 @@ class UserModel
         ]);
     }
 
-     public function findUserByEmail(string $email): array|false
+    public function findUserByEmail(string $email): array|false
     {
         $pdo = Config::getPDO();
 
@@ -32,6 +32,19 @@ class UserModel
         ");
 
         $statement->execute([':email' => $email]);
+
+        return $statement->fetch();
+    }
+
+    public function findUserByUsername(string $username): array|false
+    {
+        $pdo = Config::getPDO();
+
+        $statement = $pdo->prepare("
+            SELECT * FROM users WHERE username = :username
+        ");
+
+        $statement->execute([':username' => $username]);
 
         return $statement->fetch();
     }

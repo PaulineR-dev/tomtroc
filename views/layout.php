@@ -12,7 +12,7 @@
 <?php require 'views/header.php'; ?>
 
 <main class="main">
-    <?php require $view; ?>
+    <?php echo $content; ?>
 </main>
 
 <?php require 'views/footer.php'; ?>

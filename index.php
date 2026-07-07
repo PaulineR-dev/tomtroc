@@ -1,5 +1,8 @@
 <?php
 
+define('MAIN_VIEW_PATH', 'views/layout.php');
+define('TEMPLATE_VIEW_PATH', 'views/');
+require_once 'views/View.php';
 require_once 'config/config.php';
 
 // Action demandée par l'utilisateur
@@ -43,6 +46,7 @@ try {
             $controller = new ProfilController();
             $controller->index();
             break;
+   
 
         // Action inconnue
         default:

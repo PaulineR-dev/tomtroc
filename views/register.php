@@ -1,11 +1,14 @@
-<?php
-// views/register.php
-
-?>
-
 <section class="register-page">
     <div class="register-form">
         <h1>Inscription</h1>
+
+    <?php if (!empty($errors)) : ?>
+        <div class="error" role="alert">
+            <?php foreach ($errors as $error) : ?>
+                <p><?= htmlspecialchars($error) ?></p>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 
         <form action="index.php?action=register" method="POST">
 
@@ -21,10 +24,6 @@
             <button type="submit" class="btn-primary">S’inscrire</button>
 
         </form>
-
-        <?php if (!empty($error)) : ?>
-            <p class="error" role="alert"><?= $error ?></p>
-        <?php endif; ?>
 
         <p class="login-link">
             Déjà inscrit ? <a href="index.php?action=login">Connectez-vous</a>
