@@ -36,4 +36,4 @@
         <img src="assets/img/connection.webp" alt="Pile de livres illustrant la page d'inscription">
     </div>
 
-</div>
+</section>
