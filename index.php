@@ -1,11 +1,4 @@
 <?php
-/*
-    Rôle :
-        - Point d'entrée principal du site
-        - Initialise la session
-        - Charge la configuration et le moteur de vues
-        - Router : redirige vers le bon contrôleur selon l'action demandée
-*/
 
 session_start();
 
@@ -13,6 +6,7 @@ define('MAIN_VIEW_PATH', 'views/layout.php');
 define('TEMPLATE_VIEW_PATH', 'views/');
 require_once 'views/View.php';
 require_once 'config/config.php';
+require_once 'models/UserModel.php';
 
 // Action demandée par l'utilisateur
 $action = $_GET['action'] ?? 'helloworld';
@@ -83,6 +77,26 @@ try {
             $controller->edit();
             break;
 
+        // Upload de l'avatar page privée Mon Compte 
+        case 'uploadAvatar':
+            require_once 'controllers/AvatarController.php';
+            $controller = new AvatarController();
+            $controller->upload();
+            break;
+
+        // Page publique profil utilisateur
+        case 'profilPublic':
+            require_once 'controllers/ProfilPublicController.php';
+            $controller = new ProfilPublicController();
+            $controller->index();
+            break;
+
+        // Mise à jour informations personnelles page privée Mon compte    
+        case 'updateProfil':
+            require_once 'controllers/ProfilController.php';
+            $controller = new ProfilController();
+            $controller->updateProfil();
+            break;
 
         // Action inconnue
         default:

@@ -48,4 +48,56 @@ class UserModel
 
         return $statement->fetch();
     }
+
+    public function updateUser(int $id, ?string $email, ?string $username, ?string $hashedPassword): void
+    {
+        $pdo = Config::getPDO();
+
+        $fields = [];
+        $params = [':id' => $id];
+
+        if (!empty($email)) {
+            $fields[] = "email = :email";
+            $params[':email'] = $email;
+        }
+
+        if (!empty($username)) {
+            $fields[] = "username = :username";
+            $params[':username'] = $username;
+        }
+
+        if (!empty($hashedPassword)) {
+            $fields[] = "password = :password";
+            $params[':password'] = $hashedPassword;
+        }
+
+        if (empty($fields)) {
+            return; // rien à mettre à jour
+        }
+
+        $sql = "UPDATE users SET " . implode(", ", $fields) . " WHERE id = :id";
+
+        $statement = $pdo->prepare($sql);
+        $statement->execute($params);
+    }
+
+    public function updateAvatar($userId, $avatarPath)
+    {
+        $pdo = Config::getPDO();
+
+        $statement = $pdo->prepare("UPDATE users SET avatar = :avatar WHERE id = :id");
+        $statement->bindValue(':avatar', $avatarPath);
+        $statement->bindValue(':id', $userId);
+        $statement->execute();
+    }
+
+    public function getUserById(int $id): ?array
+    {
+        $pdo = Config::getPDO();
+
+        $statement = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+        $statement->execute([$id]);
+
+        return $statement->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
 }
