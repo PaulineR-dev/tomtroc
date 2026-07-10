@@ -103,14 +103,14 @@ body {
 }
 
 
-/* Main */
+/* MAIN */
 
 main {
     width: 100%;
 }
 
 
-/* Register page - Profil page */
+/* REGISTER PAGE */
 
 .register-page,
 .login-page {
@@ -229,4 +229,194 @@ main {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+/* PAGE "NOS LIVRES A L'ECHANGE" */
+.books-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 0;
+    font-family: "Inter", system-ui, sans-serif;
+}
+
+.books-page h1 {
+    width: 343px;
+    height: 48px;
+    font-family: "Playfair Display";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 36px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: #000000;
+}
+
+.books-page form {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 32px;
+    gap: 8px;
+}
+
+.books-page input[type="text"] {
+    padding-left: 40px;
+    font-size: 14px;
+    border: 1px solid #D0D7E2;
+    border-radius: 6px;
+    width: 240px;
+}
+
+.books-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+            margin-top: 113px;
+    margin-bottom: 50px;
+}
+
+.books-header h1 {
+    width: 343px;
+    height: 48px;
+    font-family: "Playfair Display";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 36px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: #000000;
+    margin-left: 73px;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 115px;
+}
+
+
+.search-wrapper {
+    position: relative;
+    width: 322px;
+    height: 50px;
+}
+
+.search-wrapper i {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 18px;
+    pointer-events: none;
+}
+
+.search-wrapper input {
+    width: 100%;
+    height: 100%;
+    padding-left: 45px;
+    border: 1px solid #F0F0F0;
+    border-radius: 6px;
+    background: #FFFFFF;
+    font-family: Inter;
+    font-weight: 400;
+    color: #292929;
+    font-size: 14px;
+    line-height: 100%;
+    font-style: normal;
+    font-size: 14px;
+    opacity: 1;
+}
+
+/* Grille */
+.books-list {
+    display: grid;
+    grid-template-columns: repeat(4, 200px);
+    gap: 42px;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+.book-card {
+    width: 200px;
+    height: 324px;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    cursor: pointer;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    position: relative;
+}
+
+.book-status-badge {
+    position: absolute;
+    top: 16px;
+    right: 10px; 
+    background: #C56D6D;
+    color: #FFFFFF;
+    font-family: Inter;
+    font-weight: 500;
+    font-size: 8.88px;
+    line-height: 100%;
+    border-radius: 29.58px;
+    width: 71.625px;
+    height: 18.3958px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.book-description {
+    margin-left: 22px;
+    margin-bottom: 14px;
+}
+
+.book-card h2 {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.book-author {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0;
+    padding-bottom: 6px;
+    color: #A6A6A6; 
+}
+
+.book-seller {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 10px;
+    line-height: 100%;
+    letter-spacing: 0;
+    margin-bottom: 8px;
+    color: #A6A6A6;
+}
+
+.book-card-content {
+    padding: 6px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
