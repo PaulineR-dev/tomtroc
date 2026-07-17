@@ -98,6 +98,13 @@ try {
             $controller->updateProfil();
             break;
 
+        // Supprimer un livre   
+       case 'delete':
+            require_once 'controllers/BookController.php';
+            $controller = new BookController();
+            $controller->delete();
+            break;
+
         // Action inconnue
         default:
             throw new Exception("La page demandée n'existe pas.");

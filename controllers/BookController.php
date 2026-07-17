@@ -5,6 +5,7 @@
     - add()      : ajout d’un livre
     - show()     : affichage d’un livre
     - edit()     : modification d’un livre
+    - delete()   : suppression d'un livre
 */
 
 require_once 'models/BookModel.php';
@@ -39,6 +40,7 @@ class BookController {
             $title = trim($_POST['title']);
             $author = trim($_POST['author']);
             $description = trim($_POST['description']);
+            $status = trim($_POST['status']);
             $userId = $_SESSION['idUser'];
 
             $imagePath = null;
@@ -67,13 +69,12 @@ class BookController {
             }
 
             $bookModel = new BookModel();
-            $bookModel->addBook($userId, $title, $author, $description, $imagePath);
+            $bookModel->addBook($userId, $title, $author, $description, $status, $imagePath);
 
-            header('Location: index.php?action=books');
+            header('Location: index.php?action=profil');
             exit;
         }
 
-        // Affiche le formulaire
         $view = new View("Ajouter un livre");
         $view->render("add");
     }
@@ -103,18 +104,21 @@ class BookController {
         $bookModel = new BookModel();
         $book = $bookModel->getBookById($id);
 
-        // Vérifier que l'utilisateur est le propriétaire
         if ($book['user_id'] !== $_SESSION['idUser']) {
             throw new Exception("Accès interdit");
         }
+
+        require_once 'models/UserModel.php';
+        $userModel = new UserModel();
+        $owner = $userModel->getUserById($book['user_id']);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $title = trim($_POST['title']);
             $author = trim($_POST['author']);
             $description = trim($_POST['description']);
+            $status = trim($_POST['status']);
 
-            // Garder l’ancienne image si aucune nouvelle n’est uploadée
             $imagePath = $book['image'];
 
             if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
@@ -140,13 +144,38 @@ class BookController {
                 $imagePath = $destination;
             }
 
-            $bookModel->updateBook($id, $title, $author, $description, $imagePath);
+            $bookModel->updateBook($id, $title, $author, $description, $status, $imagePath);
 
-            header('Location: index.php?action=book&id=' . $id);
+            header('Location: index.php?action=profil');
             exit;
         }
 
         $view = new View("Modifier un livre");
-        $view->render("edit", ['book' => $book]);
+        $view->render("edit", [
+            'book'  => $book,
+            'owner' => $owner
+        ]);
     }
+
+    public function delete()
+    {
+        $id = $_GET['id'];
+
+        $bookModel = new BookModel();
+        $book = $bookModel->getBookById($id);
+
+        if (!$book) {
+            throw new Exception("Livre introuvable");
+        }
+
+        if ($book['user_id'] !== $_SESSION['idUser']) {
+            throw new Exception("Accès interdit");
+        }
+
+        $bookModel->deleteBook($id);
+
+        header('Location: index.php?action=profil');
+        exit;
+    }
+
 }

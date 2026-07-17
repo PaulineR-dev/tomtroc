@@ -7,6 +7,7 @@
     - Récupération d’un livre par ID
     - Mise à jour d’un livre
     - Récupération des livres d’un utilisateur
+    - Suppression d'un livre
 */
 
 class BookModel {
@@ -41,9 +42,10 @@ class BookModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function addBook(int $userId, string $title, string $author, string $description, ?string $imagePath): void {
+    public function addBook(int $userId, string $title, string $author, string $description, string $status, ?string $imagePath): void 
+    {
         $query = "INSERT INTO books (user_id, title, author, description, image, status, created_at, updated_at)
-                  VALUES (:user_id, :title, :author, :description, :image, 'available', NOW(), NOW())";
+                VALUES (:user_id, :title, :author, :description, :image, :status, NOW(), NOW())";
 
         $statement = $this->databaseConnection->prepare($query);
         $statement->execute([
@@ -51,7 +53,8 @@ class BookModel {
             ':title'       => $title,
             ':author'      => $author,
             ':description' => $description,
-            ':image'       => $imagePath
+            ':image'       => $imagePath,
+            ':status'      => $status
         ]);
     }
 
@@ -64,9 +67,10 @@ class BookModel {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function updateBook($id, $title, $author, $description, $imagePath) {
+    public function updateBook($id, $title, $author, $description, $status, $imagePath) 
+    {
         $sql = "UPDATE books 
-                SET title = :title, author = :author, description = :description, image = :image
+                SET title = :title, author = :author, description = :description, status = :status, image = :image
                 WHERE id = :id";
 
         $stmt = $this->databaseConnection->prepare($sql);
@@ -74,6 +78,8 @@ class BookModel {
         $stmt->bindValue(':author', $author, PDO::PARAM_STR);
         $stmt->bindValue(':description', $description, PDO::PARAM_STR);
         $stmt->bindValue(':image', $imagePath, PDO::PARAM_STR);
+        $stmt->bindValue(':status', $status, PDO::PARAM_STR);
+        $stmt->bindValue(':status', $status, PDO::PARAM_STR);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 
         return $stmt->execute();
@@ -90,4 +96,13 @@ class BookModel {
         $statement->execute([':user_id' => $userId]);
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function deleteBook(int $id): void
+    {
+        $sql = "DELETE FROM books WHERE id = :id";
+        $stmt = $this->databaseConnection->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
 }

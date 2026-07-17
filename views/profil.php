@@ -71,6 +71,12 @@
 
     </div>
 
+    <div class="add-book-wrapper">
+        <a href="index.php?action=add" class="add-book-button">
+            <i class="fa-solid fa-plus"></i> Ajouter un livre
+        </a>
+    </div>
+
     <div class="library-block">
 
         <table class="library-table">
@@ -90,8 +96,8 @@
                     <tr>
                         <td>
                             <img class="library-img"
-                                 src="<?= htmlspecialchars($book['image']) ?>"
-                                 alt="<?= htmlspecialchars($book['title']) ?>">
+                                src="<?= htmlspecialchars($book['image'] ?: 'assets/img/default.webp') ?>"
+                                alt="<?= htmlspecialchars($book['title'] ?? '') ?>">
                         </td>
 
                         <td class="library-title-cell">
@@ -103,7 +109,8 @@
                         </td>
 
                         <td class="library-desc-cell">
-                            <em><?= htmlspecialchars(substr($book['description'], 0, 92)) ?>...</em>
+                            <em><?= htmlspecialchars(substr($book['description'] ?? '', 0, 92)) ?>...</em>
+
                         </td>
 
                         <td>
@@ -119,7 +126,7 @@
                                href="index.php?action=editBook&id=<?= $book['id'] ?>">Éditer</a>
                             
                             <a class="action-delete"
-                               href="index.php?action=deleteBook&id=<?= $book['id'] ?>">Supprimer</a>
+                               href="index.php?action=delete&id=<?= $book['id'] ?>">Supprimer</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
