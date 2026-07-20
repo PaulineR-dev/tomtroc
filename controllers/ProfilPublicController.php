@@ -16,10 +16,27 @@ class ProfilPublicController
 
         // Récupérer l'utilisateur
         $userModel = new UserModel();
-        $user = $userModel->getUserById($userId);
+        $user = $userModel->getPublicUserById($userId);
 
         if (!$user) {
             throw new Exception("Utilisateur introuvable.");
+        }
+
+        // Calcul du "Membre depuis"
+        $memberSince = "date inconnue";
+
+        if (!empty($user['created_at'])) {
+            $created = new DateTime($user['created_at']);
+            $now = new DateTime();
+            $diff = $created->diff($now);
+
+            if ($diff->y >= 1) {
+                $memberSince = $diff->y . ' an' . ($diff->y > 1 ? 's' : '');
+            } elseif ($diff->m >= 1) {
+                $memberSince = $diff->m . ' mois';
+            } else {
+                $memberSince = $diff->d . ' jour' . ($diff->d > 1 ? 's' : '');
+            }
         }
 
         // Récupérer ses livres
@@ -30,7 +47,8 @@ class ProfilPublicController
         $view = new View("Profil public");
         $view->render("profilPublic", [
             'user' => $user,
-            'books' => $books
+            'books' => $books,
+            'memberSince' => $memberSince
         ]);
     }
 }

@@ -72,7 +72,7 @@ class UserModel
         }
 
         if (empty($fields)) {
-            return; // rien à mettre à jour
+            return;
         }
 
         $sql = "UPDATE users SET " . implode(", ", $fields) . " WHERE id = :id";
@@ -96,6 +96,21 @@ class UserModel
         $pdo = Config::getPDO();
 
         $statement = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+        $statement->execute([$id]);
+
+        return $statement->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
+
+   public function getPublicUserById(int $id): ?array
+    {
+        $pdo = Config::getPDO();
+
+        $statement = $pdo->prepare("
+            SELECT id, username, avatar, created_at
+            FROM users
+            WHERE id = ?
+        ");
+
         $statement->execute([$id]);
 
         return $statement->fetch(PDO::FETCH_ASSOC) ?: null;
