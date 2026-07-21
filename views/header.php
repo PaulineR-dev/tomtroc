@@ -2,7 +2,7 @@
     <div class="header-inner">
 
         <div class="logo">
-            <a href="index.php?action=helloworld" aria-label="Retour à l'accueil TomTroc">
+            <a href="index.php?action=home" aria-label="Retour à l'accueil TomTroc">
                 <img id="logo" src="assets/img/logo.png" alt="">
             </a>
         </div>
@@ -15,8 +15,18 @@
             </div>
 
             <div class="nav-right">
-                <a href="index.php?action=messages">Messagerie</a>
-                <a href="index.php?action=account">Mon compte</a>
+                <div class="nav-separator"></div>
+
+                <a href="index.php?action=messages" class="nav-messages">
+                    <img src="assets/img/icons/Icon_messagerie.svg" alt="" class="icon-msg">
+                    Messagerie
+                </a>
+
+                <a href="index.php?action=account" class="nav-account">
+                    <img src="assets/img/icons/Icon_compte.svg" alt="" class="icon-account">
+                    Mon compte
+                </a>
+
                 <a href="index.php?action=login">Connexion</a>
             </div>
 
