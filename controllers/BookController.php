@@ -81,7 +81,11 @@ class BookController {
 
     public function show()
     {
-        $id = $_GET['id'];
+        $id = $_GET['id'] ?? null;
+
+        if (!$id) {
+            throw new Exception("Livre introuvable");
+        }
 
         $bookModel = new BookModel();
         $book = $bookModel->getBookById($id);
@@ -90,9 +94,15 @@ class BookController {
             throw new Exception("Livre introuvable");
         }
 
+        // Charger le propriétaire du livre
+        require_once 'models/UserModel.php';
+        $userModel = new UserModel();
+        $owner = $userModel->getUserById($book['user_id']);
+
         $view = new View("Détails du livre");
         $view->render("book", [
             'book'    => $book,
+            'owner'   => $owner,
             'session' => $_SESSION
         ]);
     }
