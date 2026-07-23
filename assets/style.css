@@ -789,7 +789,10 @@ main {
 
 /* Pages création et édition de livres */
 
-/* Retour */
+.edit-header{
+    margin-top: 40px;
+}
+
 .edit-back {
     font-family: Inter, sans-serif;
     font-size: 14px;
@@ -802,82 +805,118 @@ main {
 .edit-title {
     font-family: "Playfair Display", serif;
     font-size: 26px;
+    font-weight: 400;
     color: #000;
-    margin: 20px 0 30px 150px;
+    margin-left: 150px;
+    margin-top: 23px;
 }
 
 /* Layout */
 .edit-container {
     display: flex;
     margin-left: 150px;
-    margin-top: 20px;
-    padding: 20px;
-    border-radius: 6px;
+    margin-top: 23px;
+    border-radius: 20px;
     border: none;
-    background: #fff;
-    gap: 30px;
-    max-width: 1141px;
-    margin-bottom: 20px;
+    background: #FFFFFF;
+    gap: 118px;
+    width: 1141px;
+    margin-bottom: 92px;
+    height: 941px;
 }
 
 /* Label Photo */
 .photo-label {
-    color: #A6A6A6;
-    padding: 4px 8px;
-    font-size: 14px;
     display: inline-block;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: #A6A6A6;
+    margin-top: 56px;
+    margin-left: 50px;
     margin-bottom: 10px;
 }
 
 /* Colonne à gauche */
-.edit-left {
-    width: 488px;
-    margin-left: 25px;
-}
-
 .photo-box {
     position: relative;
+    width: 488px;
+    height: 488px;
+    margin-left: 50px;
+}
+
+.photo-box img{
+    width: 488px;
+    height: 488px;
 }
 
 /* Modifier la photo */
 .edit-photo-link {
-    position: absolute;
-    bottom: -20px;
-    right: 0;
+    justify-content: flex-end;
+    display: flex;
     font-size: 12px;
     color: #292929;
     font-family: Inter, sans-serif;
     font-weight: 400;
     text-decoration: underline;
+    margin-top: 20px;
 }
 
 /* Formulaire à droite */
 .edit-form {
     min-width: 435px;
-    padding: 20px;
 }
 
 .edit-label {
     font-family: Inter, sans-serif;
     font-size: 14px;
     color: #A6A6A6;
-    margin-top: 15px;
+    margin-top: 32px;
     display: block;
+}
+
+.edit-label:first-child {
+    margin-top: 56px;
 }
 
 .edit-input,
 .edit-textarea {
     width: 100%;
-    padding: 10px;
+    padding: 16px;
     border-radius: 6px;
     border: 1px solid #F0F0F0;
     margin-top: 5px;
     font-family: Inter, sans-serif;
     font-size: 14px;
+    box-sizing: border-box;
+    background: #EDF2F6;
+    padding: 16px 12px 17px 14px;
+}
+
+select.edit-input {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    background: #EDF2F6 url("../assets/img/icons/arrow.svg") no-repeat right 23px center;
+    background-size: 14px 7px;
+    appearance: none;
+    border: 1px solid #F0F0F0;
+    border-radius: 6px;
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    color: #292929;
+}
+
+.edit-input{
+    height: 50px;
 }
 
 .edit-textarea {
-    height: 150px;
+    height: 383px;
 }
 
 /* Bouton */
@@ -885,7 +924,7 @@ main {
     width: 322px;
     height: 63px;
     border-radius: 10px;
-    padding: 22px 38px;
+    padding: 22px 0;
     gap: 10px;
     display: flex;
     border: none;
@@ -897,7 +936,7 @@ main {
     text-align: center;
     color: #FFFFFF;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 44px;
 }
 
 /* PAGE COMPTE PUBLIC */

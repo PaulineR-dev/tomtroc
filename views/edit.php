@@ -38,8 +38,8 @@
 
             <label class="edit-label">Disponibilité</label>
             <select name="status" class="edit-input">
-                <option value="available" <?= $book['status'] === 'available' ? 'selected' : '' ?>>Disponible</option>
-                <option value="unavailable" <?= $book['status'] === 'unavailable' ? 'selected' : '' ?>>Non disponible</option>
+                <option value="available" <?= $book['status'] === 'available' ? 'selected' : '' ?>>disponible</option>
+                <option value="unavailable" <?= $book['status'] === 'unavailable' ? 'selected' : '' ?>>non disponible</option>
             </select>
 
             <button type="submit" class="edit-submit">Valider</button>
