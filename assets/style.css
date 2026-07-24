@@ -380,6 +380,7 @@ main {
     border-bottom-right-radius: 8px;
     position: relative;
     box-sizing: border-box;
+    text-decoration: none;
 }
 
 .book-status-badge {
@@ -452,7 +453,6 @@ main {
     flex-direction: column;
     gap: 4px;
 }
-
 
 /* PAGE MON COMPTE */
 .account-container {

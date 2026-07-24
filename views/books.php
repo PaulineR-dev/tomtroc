@@ -25,7 +25,7 @@
         <p>Aucun livre trouvé sous ce nom.</p>
     <?php else: ?>
         <?php foreach ($books as $book): ?>
-            <div class="book-card">
+            <a href="index.php?action=book&id=<?= $book['id'] ?>" class="book-card">
 
                 <?php if ($book['status'] !== 'available'): ?>
                     <div class="book-status-badge">non dispo.</div>
@@ -33,7 +33,7 @@
 
                 <?php if (!empty($book['image'])): ?>
                     <img src="<?= htmlspecialchars($book['image']) ?>" 
-                         alt="<?= htmlspecialchars($book['description']) ?>">
+                        alt="<?= htmlspecialchars($book['description']) ?>">
                 <?php endif; ?>
 
                 <div class="book-description">
@@ -47,8 +47,7 @@
                         Vendu par : <?= htmlspecialchars($book['seller']) ?>
                     </p>
                 </div>
-
-            </div>
+            </a>
         <?php endforeach; ?>
     <?php endif; ?>
 </div>
