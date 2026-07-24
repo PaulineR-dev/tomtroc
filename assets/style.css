@@ -301,16 +301,17 @@ main {
 
 .books-header {
     display: flex;
-    justify-content: space-around;
     align-items: center;
     width: 100%;
-            margin-top: 113px;
-    margin-bottom: 50px;
+    margin-top: 130px;
+    margin-bottom: 72px;
+    margin-left: 263px;
+    gap: 249px;
 }
 
 .books-header h1 {
     width: 343px;
-    height: 48px;
+    margin: 0;
     font-family: "Playfair Display";
     font-weight: 400;
     font-style: normal;
@@ -318,7 +319,6 @@ main {
     line-height: 100%;
     letter-spacing: 0;
     color: #000000;
-    margin-left: 73px;
 }
 
 .search-bar {
@@ -333,40 +333,39 @@ main {
     height: 50px;
 }
 
-.search-wrapper i {
+.search-icon {
     position: absolute;
-    left: 14px;
+    margin-left: 12px;
     top: 50%;
     transform: translateY(-50%);
-    color: #666;
-    font-size: 18px;
-    pointer-events: none;
+    width: 15.85px;
+    height: 15.15px;
+    background-image: url("../assets/img/icons/union.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 
 .search-wrapper input {
     width: 100%;
     height: 100%;
-    padding-left: 45px;
     border: 1px solid #F0F0F0;
     border-radius: 6px;
     background: #FFFFFF;
     font-family: Inter;
-    font-weight: 400;
-    color: #292929;
     font-size: 14px;
-    line-height: 100%;
-    font-style: normal;
-    font-size: 14px;
-    opacity: 1;
+    color: #A6A6A6;
+    box-sizing: border-box;
+    padding-left: calc(12px + 15.85px + 12.15px);
 }
 
 /* Grille */
 .books-list {
     display: grid;
     grid-template-columns: repeat(4, 200px);
-    gap: 42px;
-    justify-content: center;
-    margin-bottom: 100px;
+    gap: 38px;
+    margin-bottom: 80pxpx;
+    margin-left: 263px;
 }
 
 .book-card {
@@ -380,6 +379,7 @@ main {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     position: relative;
+    box-sizing: border-box;
 }
 
 .book-status-badge {
@@ -401,7 +401,7 @@ main {
 }
 
 .book-card img {
-    width: 100%;
+    width: 200px;
     height: 200px;
     object-fit: cover;
     display: block;
@@ -410,35 +410,40 @@ main {
 .book-card h2 {
     font-family: "Inter", sans-serif;
     font-weight: 400;
+    margin: 0;
     font-style: normal;
     font-size: 16px;
     line-height: 100%;
     letter-spacing: 0;
-    margin-top: 25px;
-    margin-bottom: 10px;
+    margin-top: 20px;
     color: #000000;
+    margin-left: 14px;
 }
 
 .book-author {
     font-family: "Inter", sans-serif;
+    margin: 0;
     font-weight: 400;
     font-style: normal;
     font-size: 14px;
     line-height: 100%;
     letter-spacing: 0;
-    padding-bottom: 6px;
-    color: #A6A6A6; 
+    color: #A6A6A6;
+    margin-top: 8px;
+    margin-left: 14px;
 }
 
 .book-seller {
     font-family: "Inter", sans-serif;
     font-weight: 400;
+    margin: 0;
     font-style: italic;
     font-size: 10px;
     line-height: 100%;
     letter-spacing: 0;
-    margin-bottom: 8px;
     color: #A6A6A6;
+    margin-top: 22px;
+    margin-left: 14px;
 }
 
 .book-card-content {
@@ -465,22 +470,22 @@ main {
 }
 
 .account-profile, .account-info {
-  background: #fff;
-  border-radius: 10px;
-  padding: 2rem;
-  width: 45%;
+    background: #fff;
+    border-radius: 10px;
+    padding: 2rem;
+    width: 45%;
 }
 
 .profile-photo {
-  width: 135px;
-  height: 135px;
-  border-radius: 50%;
-  object-fit: cover;
+    width: 135px;
+    height: 135px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .library-table {
-  width: 100%;
-  border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
 }
 
 #avatar-input {
@@ -1176,14 +1181,6 @@ select.edit-input {
     font-size: 36px;
     color: #000000;
     margin-bottom: 10px;
-}
-
-.book-author {
-    font-family: Inter, sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    color: #A6A6A6;
-    margin-bottom: 30px;
 }
 
 .book-separator {

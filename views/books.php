@@ -13,9 +13,9 @@
         <input type="hidden" name="action" value="books">
 
         <div class="search-wrapper">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" name="search" placeholder="Rechercher un livre..."
-                   value="<?= htmlspecialchars($search) ?>">
+            <div class="search-icon"></div>
+            <input type="text" name="search" placeholder="Rechercher un livre"
+                value="<?= htmlspecialchars($search) ?>">
         </div>
     </form>
 </div>
