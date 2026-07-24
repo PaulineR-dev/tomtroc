@@ -17,7 +17,7 @@
         <p class="public-library-label">BIBLIOTHÈQUE</p>
 
         <p class="public-books-count">
-            <i class="fa-solid fa-book"></i>
+            <img src="assets/img/icons/books.svg" alt="" class="books-icon">
             <?= count($books) ?> <?= count($books) < 2 ? 'livre' : 'livres' ?>
         </p>
 
@@ -49,10 +49,10 @@
                                 class="public-book-img">
                         </td>
 
-                        <td class="book-title"><?= htmlspecialchars($book['title'] ?? '') ?></td>
-                        <td class="book-author"><?= htmlspecialchars($book['author'] ?? '') ?></td>
+                        <td class="public-book-title"><?= htmlspecialchars($book['title'] ?? '') ?></td>
+                        <td class="public-book-author"><?= htmlspecialchars($book['author'] ?? '') ?></td>
 
-                        <td class="book-description">
+                        <td class="public-book-description">
                             <em><?= htmlspecialchars(substr($book['description'] ?? '', 0, 80)) ?>...</em>
                         </td>
                     </tr>
