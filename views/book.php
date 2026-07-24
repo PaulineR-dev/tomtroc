@@ -32,6 +32,8 @@
         </p>
 
         <!-- PROPRIÉTAIRE -->
+        <p class="book-section-label">PROPRIÉTAIRE</p>
+
         <a href="index.php?action=profilPublic&id=<?= $book['user_id'] ?>" class="book-owner-link">
             <div class="book-owner-box">
                 <img src="<?= htmlspecialchars($owner['avatar'] ?? 'assets/img/default.webp') ?>"

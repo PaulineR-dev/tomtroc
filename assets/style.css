@@ -426,12 +426,11 @@ main {
     margin: 0;
     font-weight: 400;
     font-style: normal;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 100%;
     letter-spacing: 0;
     color: #A6A6A6;
-    margin-top: 8px;
-    margin-left: 14px;
+    margin-top: 16px;
 }
 
 .book-seller {
@@ -1136,7 +1135,7 @@ select.edit-input {
     line-height: 100%;
     color: #A6A6A6;
     margin-left: 150px;
-    margin-top: 80px;
+    margin-top: 16px;
 }
 
 .breadcrumb a {
@@ -1148,45 +1147,32 @@ select.edit-input {
     line-height: 100%;
 }
 
-.breadcrumb span {
-    color: #292929;
-    margin-left: 4px;
-}
-
 .book-page {
     display: flex;
-    gap: 65px;
-    margin-top: 80px;
-    margin-left: 150px;
-    margin-bottom: 75px;
-}
-
-.book-left {
-    width: 50%;
+    gap: 85px;
+    margin-top: 16px;
 }
 
 .book-image {
-    width: 100%;
-    height: auto;
+    width: 720px;
+    height: 100%;
     object-fit: cover;
-}
-
-.book-right {
-    width: 50%;
 }
 
 .book-title {
     font-family: "Playfair Display", serif;
+    margin: 0;
     font-weight: 400;
     font-size: 36px;
     color: #000000;
-    margin-bottom: 10px;
+    margin-top: 59px;
 }
 
 .book-separator {
     width: 27px;
     border-bottom: 1px solid #A6A6A6;
-    margin-bottom: 30px;
+    margin-top: 32.5px;
+    margin-bottom: 34px;
 }
 
 .book-section-label {
@@ -1195,16 +1181,18 @@ select.edit-input {
     font-size: 8px;
     letter-spacing: 8%;
     color: #292929;
-    margin-bottom: 15px;
+    margin: 0;
 }
 
 .book-description {
     font-family: Inter, sans-serif;
     font-weight: 400;
+    margin: 0;
     font-size: 14px;
     color: #292929;
     width: 485px;
-    margin-bottom: 35px;
+    margin-top: 16px;
+    margin-bottom: 32px;
 }
 
 .book-owner-box {
@@ -1216,7 +1204,7 @@ select.edit-input {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 30px;
+    margin-top: 16px;
 }
 
 .book-owner-link {
@@ -1253,6 +1241,6 @@ select.edit-input {
     font-size: 16px;
     color: #FFFFFF;
     text-decoration: none;
-    margin-top: 20px;
+    margin-top: 80px;
     box-sizing: border-box;
 }
